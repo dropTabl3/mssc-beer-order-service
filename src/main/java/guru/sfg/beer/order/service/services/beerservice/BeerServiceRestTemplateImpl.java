@@ -1,6 +1,5 @@
 package guru.sfg.beer.order.service.services.beerservice;
 
-import guru.sfg.beer.order.service.services.BeerService;
 import guru.sfg.beer.order.service.services.beerservice.model.BeerDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,13 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
 @ConfigurationProperties(prefix = "sfg.brewery", ignoreUnknownFields = false)
 @Component
 public class BeerServiceRestTemplateImpl implements BeerService {
-    private final String BEER_SERVICE_PATH = "/api/v1/beerUpc/{upc}";
+    private final String BEER_SERVICE_PATH = "/api/v1/beerUpc/";
 
     private String beerServiceHost;
 
@@ -31,16 +30,8 @@ public class BeerServiceRestTemplateImpl implements BeerService {
     }
 
     @Override
-    public BeerDto getBeerDetailsBy(String upc){
-        ParameterizedTypeReference<BeerDto> typeReference = new ParameterizedTypeReference<BeerDto>() {
-        };
-
-        ResponseEntity<BeerDto> responseEntity = restTemplate
-                .exchange(beerServiceHost + BEER_SERVICE_PATH, HttpMethod.GET, null,
-                        typeReference, (Object) upc);
-
-        return Objects.requireNonNull(responseEntity.getBody());
-
+    public Optional<BeerDto> getBeerDetailsByUpc(String upc){
+        return Optional.of(restTemplate.getForObject(beerServiceHost + BEER_SERVICE_PATH + upc,BeerDto.class));
     }
 
 }

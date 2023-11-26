@@ -33,6 +33,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.SecureRandom;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -45,7 +46,6 @@ public class BeerOrderServiceImpl implements BeerOrderService {
     private final CustomerRepository customerRepository;
     private final BeerOrderMapper beerOrderMapper;
     private final ApplicationEventPublisher publisher;
-
     public BeerOrderServiceImpl(BeerOrderRepository beerOrderRepository,
                                 CustomerRepository customerRepository,
                                 BeerOrderMapper beerOrderMapper, ApplicationEventPublisher publisher) {

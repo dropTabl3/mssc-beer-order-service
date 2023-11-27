@@ -6,7 +6,7 @@ import guru.sfg.beer.order.service.domain.BeerOrderEventEnum;
 import guru.sfg.beer.order.service.domain.BeerOrderStatusEnum;
 import guru.sfg.beer.order.service.repositories.BeerOrderRepository;
 import guru.sfg.beer.order.service.services.BeerOrderManagerImpl;
-import guru.sfg.beer.order.service.web.model.ValidateBeerOrderRequest;
+import guru.sfg.common.events.ValidateBeerOrderRequest;
 import guru.sfg.beer.order.service.web.mappers.BeerOrderMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jms.core.JmsTemplate;

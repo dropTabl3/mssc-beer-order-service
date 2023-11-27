@@ -1,4 +1,4 @@
-package guru.sfg.beer.order.service.web.model;
+package guru.sfg.common.events;
 
 import guru.sfg.beer.order.service.web.model.BeerOrderDto;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ValidateBeerOrderRequest {
-    private BeerOrderDto beerOrderDto;
+public class ValidateBeerOrderResponse {
+    private boolean valid;
 }

@@ -39,6 +39,17 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
         return savedBeerOrder;
     }
 
+    @Transactional
+    @Override
+    public void validateOrder(UUID orderId, boolean valid) {
+        if (valid) {
+            sendBeerOrderEvent(orderId, beerOrderRepository.getOne(orderId), BeerOrderEventEnum.VALIDATION_PASSED);
+            sendBeerOrderEvent(orderId, beerOrderRepository.getOne(orderId), BeerOrderEventEnum.ALLOCATE_ORDER);
+        } else {
+            sendBeerOrderEvent(orderId, beerOrderRepository.getOne(orderId), BeerOrderEventEnum.VALIDATION_FAILED);
+        }
+    }
+
     private void sendBeerOrderEvent(UUID orderId, BeerOrder beerOrder, BeerOrderEventEnum eventEnum){
         StateMachine<BeerOrderStatusEnum, BeerOrderEventEnum> sm = build(beerOrder);
 

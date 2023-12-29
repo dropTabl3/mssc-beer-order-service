@@ -16,7 +16,7 @@ import java.util.Optional;
 @ConfigurationProperties(prefix = "sfg.brewery", ignoreUnknownFields = false)
 @Component
 public class BeerServiceRestTemplateImpl implements BeerService {
-    private final String BEER_SERVICE_PATH = "/api/v1/beerUpc/";
+    public final static String BEER_SERVICE_PATH = "/api/v1/beerUpc/";
 
     private String beerServiceHost;
 
